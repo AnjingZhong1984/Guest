@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context=".VisitorRegistActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="130dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="External Visitor Registor\n外部访客登记"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="410dp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/texttitle"
+                android:padding="6dp"
+                android:text="Your Information 您的信息"
+                android:textColor="#ffffff"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/visitCompany"
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/bgedittext"
+                android:hint="Your Company  您的公司*"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/visitName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bgedittext"
+                android:hint="Your Name  您的姓名*"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/visitMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bgedittext"
+                android:hint="Your Phone  您的电话*"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bgedittext"
+                android:hint="Reason For Visit  来访事由*"
+                android:inputType="text"
+                android:padding="15dp"
+                android:paddingTop="15dp"
+                android:textSize="26dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="10dp"
+            android:layout_height="330dp"
+            android:background="@drawable/dash"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/texttitle"
+                android:padding="6dp"
+                android:text="Contact Information 拜访对象"
+                android:textColor="#ffffff"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="520dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/bgedittext"
+                android:hint="Employee Name  员工姓名*"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bgedittext"
+                android:hint="Employee Email  员工邮箱*"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textSize="26dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/backbtn" />
+
+        <ImageView
+            android:id="@+id/restBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:srcCompat="@drawable/resetbtn" />
+
+        <ImageView
+            android:id="@+id/submitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/submitbtn" />
+
+    </LinearLayout>
+
+</LinearLayout>
