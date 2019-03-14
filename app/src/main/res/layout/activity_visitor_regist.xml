@@ -39,21 +39,30 @@
             android:layout_marginRight="40dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="400dp"
+            <!--<TextView-->
+                <!--android:id="@+id/textView"-->
+                <!--android:layout_width="400dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/texttitle"-->
+                <!--android:padding="6dp"-->
+                <!--android:text="Your Information 您的信息"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="26dp" />-->
+
+            <ImageView
+                android:id="@+id/visitNameImg"
+                android:layout_width="520dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/texttitle"
-                android:padding="6dp"
-                android:text="Your Information 您的信息"
-                android:textColor="#ffffff"
-                android:textSize="26dp" />
+                android:src="@drawable/visitnameimg"
+                />
 
             <EditText
                 android:id="@+id/visitCompany"
                 android:layout_width="520dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/bgedittext"
                 android:hint="Your Company  您的公司*"
                 android:inputType="text"
@@ -71,14 +80,16 @@
                 android:padding="15dp"
                 android:textSize="26dp" />
 
+
             <EditText
                 android:id="@+id/visitMobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bgedittext"
+                android:digits="1234567890"
                 android:hint="Your Phone  您的电话*"
-                android:inputType="text"
+                android:inputType="phone|number"
                 android:padding="15dp"
                 android:textSize="26dp" />
 
@@ -109,24 +120,33 @@
             android:layout_marginLeft="40dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="400dp"
+            <!--<TextView-->
+                <!--android:id="@+id/textView2"-->
+                <!--android:layout_width="400dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/texttitle"-->
+                <!--android:padding="6dp"-->
+                <!--android:text="Contact Information 拜访对象"-->
+                <!--android:textColor="#ffffff"-->
+                <!--android:textSize="26dp" />-->
+            <ImageView
+                android:id="@+id/contactInfoImg"
+                android:layout_width="520dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/texttitle"
-                android:padding="6dp"
-                android:text="Contact Information 拜访对象"
-                android:textColor="#ffffff"
-                android:textSize="26dp" />
+                android:src="@drawable/contactinfoimg"
+                />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/name"
                 android:layout_width="520dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/bgedittext"
                 android:hint="Employee Name  员工姓名*"
                 android:inputType="text"
+                android:completionThreshold="1"
                 android:padding="15dp"
                 android:textSize="26dp" />
 
@@ -138,6 +158,18 @@
                 android:background="@drawable/bgedittext"
                 android:hint="Employee Email  员工邮箱*"
                 android:inputType="text"
+                android:padding="15dp"
+                android:textSize="26dp" />
+
+            <EditText
+                android:id="@+id/visitNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bgedittext"
+                android:digits="1234567890"
+                android:hint="Number 随行人数，1人"
+                android:inputType="number"
                 android:padding="15dp"
                 android:textSize="26dp" />
         </LinearLayout>

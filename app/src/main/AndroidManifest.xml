@@ -14,16 +14,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
-            android:name=".CheckoutActivity"
+            android:name="com.fafa.guest.CheckoutActivity"
             android:label="@string/title_activity_checkout"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:hardwareAccelerated="false"
-            android:name=".VisitorRegistActivity"
+            android:name="com.fafa.guest.VisitorRegistActivity"
             android:label="@string/title_activity_visitor_regist"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+
+        <activity android:name="com.fafa.guest.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,5 +1,6 @@
 package com.fafa.guest;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.visitorBtnImage).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void onClick(View v) {
 
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         "I acknowledge and will follow Air Products Safety and Security Notice for Visitors\n");
                 ScrollView sv = new ScrollView(MainActivity.this);
                 sv.addView(tv);
-                builder.setIcon(R.drawable.logo).setTitle("AP访客须知");
+                builder.setIcon(R.drawable.logo1).setTitle("AP访客须知");
                 builder.setView(sv);
                 builder.setNegativeButton("Cancel(取消)", null);
                 builder.setPositiveButton("Agree(同意)", new DialogInterface.OnClickListener() {
