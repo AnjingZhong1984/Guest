@@ -133,6 +133,7 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                     m.put("reason", reason.getText().toString());
                     m.put("email", visitEmail);
                     m.put("visitNum", accPersonNum);
+                    m.put("visitCompany",visitCompany.getText().toString());
                     final String finalAccPersonNum = accPersonNum;
                     Thread t = new Thread(new HttpSend("post", m, "http://demo.fafa.com.cn:6161/fengqi/reserve/save", new Callback<Object, Object>() {
                         @Override
@@ -143,7 +144,8 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                             try {
                                 ret = new JSONObject(o.toString());
                                 if (ret.optBoolean("success")) {
-                                    m.put("visitTime", ret.optJSONObject("data").optString("visitTime"));
+                                    String s= ret.optJSONObject("data").optString("visitTime");
+                                    m.put("visitTime", s.replace("T"," ").substring(0,16));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
