@@ -163,23 +163,23 @@ public class UsbPrintUtil {
         //打印数据格式
         data.append("{PC003;0900,0340,15,15,r,22,B|}");
         //打印数据
-        data.append("{RC003;  访客姓名(Name):     " + parameters.get("visitName") + "|}");
+        data.append("{RC003;  访客姓名(Name):  " + parameters.get("visitName") + "|}");
         //打印数据格式
         data.append("{PC004;0900,0270,15,15,r,22,B|}");
         //打印数据
-        data.append("{RC004;  所属公司(Company):  " + parameters.get("visitCompany") + "|}");
+        data.append("{RC004;  所属公司(Comp.): " + parameters.get("visitCompany") + "|}");
         //打印数据格式
         data.append("{PC005;0900,0200,15,15,r,22,B|}");
         //打印数据
-        data.append("{RC005;  被访对象(Employee): " + parameters.get("name") + "|}");
+        data.append("{RC005;  被访对象(Emp.):  " + parameters.get("name") + "|}");
         //打印数据格式
         data.append("{PC006;0900,0130,15,15,r,22,B|}");
         //打印数据
-        data.append("{RC006;  随行人数(Num.):     " + parameters.get("visitNum") + "|}");
+        data.append("{RC006;  随行人数(Num.):  " + parameters.get("visitNum") + "|}");
         //打印数据格式
         data.append("{PC007;0900,0060,15,15,r,22,B|}");
         //打印数据
-        data.append("{RC007;  来访时间(Time):    " + parameters.get("visitTime") + "|}");
+        data.append("{RC007;  来访时间(Time):  " + parameters.get("visitTime") + "|}");
 //        data.append("{LC;0880,0400,0020,0400,0,3|}");
         //打印设置
 //        data.append("{XS;I,0001,0000C1010|}");

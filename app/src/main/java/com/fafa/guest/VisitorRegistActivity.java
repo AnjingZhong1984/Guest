@@ -112,9 +112,6 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                 } else if (!checkEmail(visitEmail)) {
                     Toast.makeText(VisitorRegistActivity.this, "邮箱格式不正确", Toast.LENGTH_LONG).show();
                 } else {
-
-                    customDialog.show();//显示loading
-
                     //随行人数不输入，默认为1
                     if (accPersonNum.length() == 0) {
                         accPersonNum = "1";
@@ -124,6 +121,7 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                         Toast.makeText(VisitorRegistActivity.this, "您的随行人数太多了，请联系您的被访对象，确认您的行程", Toast.LENGTH_LONG).show();
                         return;
                     }
+                    customDialog.show();//显示loading
                     final Map<String, String> m = new HashMap<>();
                     m.put("date", sdf.format(new Date()));
                     m.put("visitName", visitName.getText().toString());
