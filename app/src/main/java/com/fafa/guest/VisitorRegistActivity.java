@@ -13,9 +13,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -104,6 +101,9 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
             public void onClick(View v) {
                 String mobile = visitMobile.getText().toString().trim();
                 String visitEmail = email.getText().toString().trim();
+                if (visitEmail.indexOf('@') < 0) {
+                    visitEmail = visitEmail + "@airproducts.com";
+                }
                 String accPersonNum = visitNum.getText().toString().trim();
                 if (!checkNull()) {
                     Toast.makeText(VisitorRegistActivity.this, "请填写完整内容", Toast.LENGTH_LONG).show();
@@ -131,23 +131,25 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                     m.put("reason", reason.getText().toString());
                     m.put("email", visitEmail);
                     m.put("visitNum", accPersonNum);
-                    m.put("visitCompany",visitCompany.getText().toString());
+                    m.put("visitCompany", visitCompany.getText().toString());
                     final String finalAccPersonNum = accPersonNum;
-                    Thread t = new Thread(new HttpSend("post", m, "http://demo.fafa.com.cn:6161/fengqi/reserve/save", new Callback<Object, Object>() {
+                    Thread t = new Thread(new HttpSend("post", m, "http://192.168.10.32:6161/fengqi/reserve/save", new Callback<Object, Object>() {
                         @Override
                         public Object call(Object o) {
                             System.out.println(o);
                             m.put("visitTime", Objects.requireNonNull(m.get("date")));
-                            JSONObject ret;
-                            try {
-                                ret = new JSONObject(o.toString());
-                                if (ret.optBoolean("success")) {
-                                    String s= ret.optJSONObject("data").optString("visitTime");
-                                    m.put("visitTime", s.replace("T"," ").substring(0,16));
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+//                            JSONObject ret;
+//                            try {
+//                                ret = new JSONObject(o.toString());
+//                                if (ret.optBoolean("success")) {
+//                                        String s = ret.optJSONObject("data").optString("visitTime");
+//                                    String time = s.replace("T", " ").substring(0, 16);
+//
+//                                    m.put("visitTime", s.replace("T", " ").substring(0, 16));
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
                             int num = Integer.parseInt(finalAccPersonNum);
                             try {
                                 for (int i = 0; i < num; i++) {
