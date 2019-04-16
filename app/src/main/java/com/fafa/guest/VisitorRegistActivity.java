@@ -133,7 +133,7 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                     m.put("visitNum", accPersonNum);
                     m.put("visitCompany", visitCompany.getText().toString());
                     final String finalAccPersonNum = accPersonNum;
-                    Thread t = new Thread(new HttpSend("post", m, "http://192.168.10.32:6161/fengqi/reserve/save", new Callback<Object, Object>() {
+                    Thread t = new Thread(new HttpSend("post", m, "http://demo.fafa.com.cn:6161/fengqi/reserve/save", new Callback<Object, Object>() {
                         @Override
                         public Object call(Object o) {
                             System.out.println(o);
@@ -150,6 +150,16 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
 //                            } catch (JSONException e) {
 //                                e.printStackTrace();
 //                            }
+                            customDialog.dismiss();
+                            finish();
+                            return null;
+                        }
+                    }));
+                    t.start();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            m.put("visitTime", Objects.requireNonNull(m.get("date")));
                             int num = Integer.parseInt(finalAccPersonNum);
                             try {
                                 for (int i = 0; i < num; i++) {
@@ -158,12 +168,8 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                             } catch (Exception e) {
                                 Toast.makeText(VisitorRegistActivity.this, "打印机连接出错，打印失败", Toast.LENGTH_LONG).show();
                             }
-                            customDialog.dismiss();
-                            finish();
-                            return null;
                         }
-                    }));
-                    t.start();
+                    }).start();
                 }
             }
         });

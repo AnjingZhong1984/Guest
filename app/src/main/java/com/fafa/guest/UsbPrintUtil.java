@@ -182,9 +182,9 @@ public class UsbPrintUtil {
         data.append("{RC007;  来访时间(Time):  " + parameters.get("visitTime") + "|}");
 //        data.append("{LC;0880,0400,0020,0400,0,3|}");
         //打印设置
-//        data.append("{XS;I,0001,0000C1010|}");
-        //有拦截时候不打
-        data.append("{XS;I,0001,0000D5001|}");
+        data.append("{XS;I,0001,0000C1010|}");
+        //有拦截时候不打，有剥纸器时候，放开
+//        data.append("{XS;I,0001,0000D5001|}");
         try {
             sendCommand(mEndpointIntr, mConnection, data.toString().getBytes("GB2312"));
             context.unregisterReceiver(mUsbPermissionActionReceiver);
