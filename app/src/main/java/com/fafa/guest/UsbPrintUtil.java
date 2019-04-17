@@ -92,7 +92,7 @@ public class UsbPrintUtil {
         }
     }
 
-    public void print(final Map<String, String> parameters) {
+    public void print(final Map<String, String> parameters) throws Exception{
         boolean flag = openUsbDevice();
         usbPrint(parameters);
         close();
@@ -104,7 +104,7 @@ public class UsbPrintUtil {
                     usbPrint(parameters);
                     close();
                 }
-            }, 5000);
+            }, 3000);
         }
     }
 

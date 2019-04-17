@@ -18,7 +18,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
@@ -121,7 +120,9 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                         Toast.makeText(VisitorRegistActivity.this, "您的随行人数太多了，请联系您的被访对象，确认您的行程", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    customDialog.show();//显示loading
+                    if(customDialog!=null) {
+                        customDialog.show();//显示loading
+                    }
                     final Map<String, String> m = new HashMap<>();
                     m.put("date", sdf.format(new Date()));
                     m.put("visitName", visitName.getText().toString());
@@ -133,43 +134,35 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                     m.put("visitNum", accPersonNum);
                     m.put("visitCompany", visitCompany.getText().toString());
                     final String finalAccPersonNum = accPersonNum;
-                    Thread t = new Thread(new HttpSend("post", m, "http://demo.fafa.com.cn:6161/fengqi/reserve/save", new Callback<Object, Object>() {
-                        @Override
-                        public Object call(Object o) {
-                            System.out.println(o);
-                            m.put("visitTime", Objects.requireNonNull(m.get("date")));
-//                            JSONObject ret;
-//                            try {
-//                                ret = new JSONObject(o.toString());
-//                                if (ret.optBoolean("success")) {
-//                                        String s = ret.optJSONObject("data").optString("visitTime");
-//                                    String time = s.replace("T", " ").substring(0, 16);
-//
-//                                    m.put("visitTime", s.replace("T", " ").substring(0, 16));
-//                                }
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-                            customDialog.dismiss();
-                            finish();
-                            return null;
-                        }
-                    }));
-                    t.start();
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            m.put("visitTime", Objects.requireNonNull(m.get("date")));
-                            int num = Integer.parseInt(finalAccPersonNum);
                             try {
+                                m.put("visitTime", m.get("date") + "");
+                                int num = Integer.parseInt(finalAccPersonNum);
                                 for (int i = 0; i < num; i++) {
-                                    usbPrintUtil.print(m);
+                                    try {
+                                        usbPrintUtil.print(m);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             } catch (Exception e) {
                                 Toast.makeText(VisitorRegistActivity.this, "打印机连接出错，打印失败", Toast.LENGTH_LONG).show();
                             }
                         }
                     }).start();
+                    new Thread(new HttpSend("post", m, "http://demo.fafa.com.cn:6161/fengqi/reserve/save", new Callback<Object, Object>() {
+                        @Override
+                        public Object call(Object o) {
+                            System.out.println(o);
+                            if (customDialog != null) {
+                                customDialog.dismiss();
+                            }
+                            finish();
+                            return null;
+                        }
+                    })).start();
                 }
             }
         });
