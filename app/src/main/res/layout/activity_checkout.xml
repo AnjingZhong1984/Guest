@@ -64,19 +64,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="160dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:srcCompat="@drawable/backbtn" />
 
         <ImageView
             android:id="@+id/restBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             app:srcCompat="@drawable/resetbtn" />
@@ -84,7 +84,7 @@
         <ImageView
             android:id="@+id/submitBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:srcCompat="@drawable/submitbtn" />
 
     </LinearLayout>

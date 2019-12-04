@@ -1,7 +1,10 @@
 package com.fafa.guest;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +23,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.TimerTask;
 
 public class VisitorRegistActivity extends AppCompatActivity implements View.OnLayoutChangeListener {
 
@@ -49,11 +53,8 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
         @Override
         public void afterTextChanged(Editable s) {
             if (visitName.getText().toString().trim().length() > 0 && visitCompany.getText().toString().trim().length() > 0) {
-                ArrayAdapter<String> adapter = (ArrayAdapter<String>) name.getAdapter();
-                adapter.addAll("aaa", "bbb", "ccc");
                 //设置联想的字符集合
                 Map<String, String> m = new HashMap<>();
-
                 new Thread(new HttpSend("post", m, "http://demo.fafa.com.cn:6161/fengqi/reserve/checkname", new Callback<Object, Object>() {
                     @Override
                     public Object call(Object o) {
@@ -120,7 +121,7 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                         Toast.makeText(VisitorRegistActivity.this, "您的随行人数太多了，请联系您的被访对象，确认您的行程", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    if(customDialog!=null) {
+                    if (customDialog != null) {
                         customDialog.show();//显示loading
                     }
                     final Map<String, String> m = new HashMap<>();
@@ -133,6 +134,7 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                     m.put("email", visitEmail);
                     m.put("visitNum", accPersonNum);
                     m.put("visitCompany", visitCompany.getText().toString());
+                    m.put("remark", "88-1");
                     final String finalAccPersonNum = accPersonNum;
                     new Thread(new Runnable() {
                         @Override
@@ -166,6 +168,8 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
                 }
             }
         });
+
+        setTimer();
     }
 
     /**
@@ -252,27 +256,74 @@ public class VisitorRegistActivity extends AppCompatActivity implements View.OnL
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         System.out.println("----onWindowFocusChanged-----" + hasFocus);
-        fullscreen(this);
         super.onWindowFocusChanged(hasFocus);
+        fullscreen(this);
     }
 
     public void fullscreen(Activity activity) {
-        int systemUiVisibility = activity.getWindow().getDecorView().getSystemUiVisibility();
-        int flags = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-                | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        systemUiVisibility |= flags;
-        activity.getWindow().getDecorView().setSystemUiVisibility(systemUiVisibility);
-        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        try {
+            int systemUiVisibility = activity.getWindow().getDecorView().getSystemUiVisibility();
+            int flags = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+            systemUiVisibility |= flags;
+            activity.getWindow().getDecorView().setSystemUiVisibility(systemUiVisibility);
+            activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            ActionBar actionBar = getActionBar();
+            if (actionBar != null) {
+                actionBar.hide();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        System.out.println("=================");
+        fullscreen(this);
+
     }
+
+    private static final int TIMER = 999;
+    private MyTimeTask task;
+
+    private void setTimer() {
+        if (task == null) {
+            task = new MyTimeTask(1000, new TimerTask() {
+                @Override
+                public void run() {
+                    mHandler.sendEmptyMessage(TIMER);
+                    //或者发广播，启动服务都是可以的
+                }
+            });
+            task.start();
+        }
+    }
+
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == TIMER) {
+                fullscreen(VisitorRegistActivity.this);
+            }
+        }
+    };
+
+    private void stopTimer() {
+        task.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopTimer();
+    }
+
 }

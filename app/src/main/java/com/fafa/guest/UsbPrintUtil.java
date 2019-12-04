@@ -92,7 +92,7 @@ public class UsbPrintUtil {
         }
     }
 
-    public void print(final Map<String, String> parameters) throws Exception{
+    public void print(final Map<String, String> parameters) throws Exception {
         boolean flag = openUsbDevice();
         usbPrint(parameters);
         close();
@@ -156,8 +156,16 @@ public class UsbPrintUtil {
         if (s.length() > 11) {
             s = s.substring(0, 10);
         }
+        String remark = parameters.get("remark");
+        String addr = "88号1楼 ";
+        if (remark != null) {
+            String[] addres = addr.split("-");
+            if (addres.length == 2) {
+                addr = addres[0] + "号" + addres[1] + "楼 ";
+            }
+        }
         //打印数据
-        data.append("{RC001;  Air Products          87号楼 访客证|}");
+        data.append("{RC001;  Air Products         " + addr + "访客证|}");
         data.append("{PC002;0900,0410,15,15,r,22,B|}");
         data.append("{RC002;  .....................................|}");
         //打印数据格式
